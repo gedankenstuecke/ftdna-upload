@@ -1,12 +1,5 @@
-# Welcome to my little project.
+# Upload your FamilyTreeDNA data to *Open Humans*
 
-This page offers you space to describe your project. What are its goals?
-What kind of data are you looking for? Who's running this thing.
+Through this project you can upload your *FamilyTreeDNA* data to *Open Humans*, allowing you to share your data with other interesting projects or gain some insights from it. To get started all you have to do is login into *Open Humans*, authorize us and upload your new *FamilyTreeDNA* data file.  
 
-## Writing
-This text is [all written in Markdown](https://en.wikipedia.org/wiki/Markdown).
-This makes it easy for you to adjust the about pages, descriptions etc.
-You can find these files in `_descriptions/` in your GitHub repository. This column
-of the page is powered by `_descriptions/about.md`.
-
-The righthand column is populated by `_descriptions/faq.md`.
+Some of your questions should be answered in our FAQ.

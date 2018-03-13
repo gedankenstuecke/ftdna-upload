@@ -133,7 +133,7 @@ def process_target(data_file, access_token, member, metadata):
                     "the right file:\nWe expect the file to be a "
                     "single, - gzipped (ends in .gz) - file as "
                     "you can download from FamilyTreeDNA. Please "
-                    "do not alter the file, as unexpected additions "
+                    "do not alter or unzip this file, as unexpected additions "
                     "also invalidate the file.",
                     access_token)
 
