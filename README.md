@@ -1,25 +1,10 @@
-# Open Humans Uploader
-
-[![travis](https://travis-ci.org/gedankenstuecke/oh_data_uploader.svg?branch=master)](https://travis-ci.org/gedankenstuecke/oh_data_uploader)
-<a href="https://codeclimate.com/github/gedankenstuecke/oh_data_uploader/maintainability"><img src="https://api.codeclimate.com/v1/badges/0e3dce4fd4af6e5fc555/maintainability" /></a>
-<a href="https://codeclimate.com/github/gedankenstuecke/oh_data_uploader/test_coverage"><img src="https://api.codeclimate.com/v1/badges/0e3dce4fd4af6e5fc555/test_coverage" /></a>
-> it's like *Jekyll* for *Open Humans* projects
+# A *FamilyTreeDNA* upload project for *Open Humans*
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-- [Open Humans Uploader](#open-humans-uploader)
-  * [Deployment to *heroku*.](#deployment-to-heroku)
-    + [**Step 1**: Click the *deploy to heroku* button above.](#step-1-click-the-deploy-to-heroku-button-above)
-    + [**Step 2**: Fill out the parameters that *heroku* asks you](#step-2-fill-out-the-parameters-that-heroku-asks-you)
-    + [**Step 3**: Create your project on *Open Humans*](#step-3-create-your-project-on-open-humans)
-    + [**Step 4**: Grab your Oauth credentials from *Open Humans*](#step-4-grab-your-oauth-credentials-from-open-humans)
-    + [**Step 5**: Finalize your Uploader setup](#step-5-finalize-your-uploader-setup)
-  * [Local Deployment and Development](#local-deployment-and-development)
-  * [Contributing](#contributing)
+This is a Django project that is based on the [Open Humans Data Uploader](https://www.github.com/gedankenstuecke/oh_data_uploader). It uses the same general logic for setting up the project. But in addition to this it adds a simple *Celery* task that is enqueued as soon as a new file is uploaded.
 
-This is a Django project that functions as a
-file uploader for individual *Open Humans* projects. It can easily be deployed to
-*heroku* and all the configuration can be done through your web browser once the project is deployed. A step-by-step guide can be found below
+This task grabs the newly uploaded file from *Open Humans* and performs some general verifications to test that it's a proper *FamilyTreeDNA* file. Invalid rows from the file are being deleted to ensure the privacy of participants. If the uploaded file is completely broken the file will be deleted and the user is getting a message notifying them about the problem.
 
 ## Deployment to *heroku*.
 
@@ -72,8 +57,8 @@ This last bit is done [by writing Markdown formatted text right into the forms](
 
 ## Local Deployment and Development
 The *Open Humans Uploader* is written in *Python 3.6+*, uses the *Django 2.0* framework and is designed to be ultimately deployed
-to *Heroku*. You will need some additional modules and packages to locally experiment with this uploader template or to develop it further. A full step-by-step guide that should work for Mac OS (and with minor differences for Linux) [can be found in the INSTALL.md](https://github.com/gedankenstuecke/oh_data_uploader/blob/master/INSTALL.md).
+to *Heroku*. You will need some additional modules and packages to locally experiment with this uploader template or to develop it further. A full step-by-step guide that should work for Mac OS (and with minor differences for Linux) [can be found in the INSTALL.md](https://github.com/gedankenstuecke/ftdna-upload/blob/master/INSTALL.md).
 
 
 ## Contributing
-We'd love to get your contribution to this project, thanks so much for your interest in this! Please [read our `CONTRIBUTING.md`](https://github.com/gedankenstuecke/oh_data_uploader/blob/master/CONTRIBUTING.md) to see how you can help and become part of our team! 🎉 Also have [a look at our `ROADMAP.md`](https://github.com/gedankenstuecke/oh_data_uploader/blob/master/ROADMAP.md) to see what we want to work on in the future.
+We'd love to get your contribution to this project, thanks so much for your interest in this! Please [read our `CONTRIBUTING.md`](https://github.com/gedankenstuecke/ftdna-upload/blob/master/CONTRIBUTING.md) to see how you can help and become part of our team! 🎉 Also have [a look at our `ROADMAP.md`](https://github.com/gedankenstuecke/ftdna-upload/blob/master/ROADMAP.md) to see what we want to work on in the future.
