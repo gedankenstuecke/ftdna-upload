@@ -120,7 +120,7 @@ def process_target(data_file, access_token, member, metadata):
                         access_token,
                         str(member['project_member_id']),
                         data_file['metadata'])
-    finally:
+    except:
         print('delete broken file')
         api.delete_file(access_token,
                         str(member['project_member_id']),
