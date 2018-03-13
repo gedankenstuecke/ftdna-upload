@@ -18,6 +18,10 @@
     "SECRET_KEY": {
       "description": "This is set for you and is used to encrypt data.",
       "generator": "secret"
-    }
+    },
+    "REDIS_URL": {
+      "description": "Where your redis resides",
+      "value": "redis://"
+    }    
   }
 }
