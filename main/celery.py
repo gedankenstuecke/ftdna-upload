@@ -40,6 +40,15 @@ def check_integer(string):
         return False
 
 
+def check_chromosome(string):
+    string = string.replace('"', '')
+    if string in ['X', 'Y', 'MT', 'M'] or \
+       check_integer(string):
+        return True
+    else:
+        return False
+
+
 def valid_line(line):
     lsplit = line.rstrip().split(",")
     if check_integer(lsplit[1]) and \
@@ -87,29 +96,46 @@ def debug_task(self):
 
 
 def process_target(data_file, access_token, member, metadata):
-    tf = tempfile.NamedTemporaryFile(suffix=".gz")
-    tf_out = tempfile.NamedTemporaryFile(prefix="ftdna-",
-                                         suffix=".csv",
-                                         mode="w+b")
-    print("downloading ftdna file from oh")
-    tf.write(requests.get(data_file['download_url']).content)
-    tf.flush()
-    print('read ftdna file')
-    with gzip.open(tf.name, "rt", newline="\n") as ftdna_file:
-        for line in ftdna_file:
-            if valid_line(line):
-                tf_out.write(line.encode('ascii'))
-    tf_out.flush()
-    tf_out.seek(0)
-    print('cleaned file')
-    api.delete_file(access_token,
-                    str(member['project_member_id']),
-                    file_id=str(data_file['id']))
-    print('deleted old')
-    upload_new_file(tf_out,
-                    access_token,
-                    str(member['project_member_id']),
-                    data_file['metadata'])
+    try:
+        tf = tempfile.NamedTemporaryFile(suffix=".gz")
+        tf_out = tempfile.NamedTemporaryFile(prefix="ftdna-",
+                                             suffix=".csv",
+                                             mode="w+b")
+        print("downloading ftdna file from oh")
+        tf.write(requests.get(data_file['download_url']).content)
+        tf.flush()
+        print('read ftdna file')
+        with gzip.open(tf.name, "rt", newline="\n") as ftdna_file:
+            for line in ftdna_file:
+                if valid_line(line):
+                    tf_out.write(line.encode('ascii'))
+        tf_out.flush()
+        tf_out.seek(0)
+        print('cleaned file')
+        api.delete_file(access_token,
+                        str(member['project_member_id']),
+                        file_id=str(data_file['id']))
+        print('deleted old')
+        upload_new_file(tf_out,
+                        access_token,
+                        str(member['project_member_id']),
+                        data_file['metadata'])
+    finally:
+        print('delete broken file')
+        api.delete_file(access_token,
+                        str(member['project_member_id']),
+                        file_id=str(data_file['id']))
+        api.message("A broken file was deleted",
+                    "While processing your FamilyTreeDNA file "
+                    "we noticed that your file does not conform "
+                    "to the expected specifications and it was "
+                    "thus deleted. Please make sure you upload "
+                    "the right file:\nWe expect the file to be a "
+                    "single, - gzipped (ends in .gz) - file as "
+                    "you can download from FamilyTreeDNA. Please "
+                    "do not alter the file, as unexpected additions "
+                    "also invalidate the file.",
+                    access_token)
 
 
 @app.task(bind=True)
