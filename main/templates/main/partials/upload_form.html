@@ -2,6 +2,7 @@
   var file_metadata = {{ files_js | safe }};
   var access_token = "{{ oh_member.access_token }}";
   var member_id = {{ oh_member.oh_id }};
+  var csrf_token = "{{ csrf_token }}";
 </script>
 {% load static %}
 {% load utilities %}

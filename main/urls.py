@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^upload_simple/?$', views.upload_old, name='upload_old'),
     url(r'^about/?$', views.about, name='about'),
     url(r'^list/?$', views.list_files, name='list'),
-    url(r'^delete/(?P<file_id>\w+)/?$', views.delete_file, name='delete')
+    url(r'^delete/(?P<file_id>\w+)/?$', views.delete_file, name='delete'),
+    url(r'^trigger_processing/?$', views.trigger, name='trigger'),
 ]

@@ -17,6 +17,7 @@ import requests
 
 from project_admin.models import ProjectConfiguration, FileMetaData
 from .helpers import oh_code_to_member
+from .celery import clean_uploaded_file
 
 logger = logging.getLogger(__name__)
 
@@ -253,4 +254,15 @@ def list_files(request):
         context = {'files': data['data']}
         return render(request, 'main/list.html',
                       context=context)
+    return redirect('index')
+
+
+def trigger(request):
+    """
+    Logout user
+    """
+    if request.method == 'POST':
+        token = request.POST.get("access_token")
+        file_id = request.POST.get("file_id")
+        clean_uploaded_file(token, int(file_id))
     return redirect('index')

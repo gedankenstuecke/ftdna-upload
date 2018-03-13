@@ -1,7 +1,2 @@
-## What's this?
-This page is being shown for users who come back after having logged in and (most likely)
-have already uploaded data. It serves people who want to replace their data with a new data set.
-In the future this view hopefully will also show all the files that
-
-- are already in a user's account
-- give the option to delete individual files
+## Welcome to the *FamilyTreeDNA* integration!
+If you've already uploaded some data you can have a look at the files (and delete them) by clicking on the *List* in the top menu bar. If you want to upload new files you can do so right here!

@@ -2,6 +2,7 @@ var file, response;
 var xhr = new XMLHttpRequest();
 var put_xhr = new XMLHttpRequest();
 var finish_xhr = new XMLHttpRequest();
+var trigger_xhr = new XMLHttpRequest();
 
 function startUpload() {
   var uploaded = false;
@@ -60,6 +61,10 @@ function uploadedFile(e) {
 function finishedFile(e) {
       if (finish_xhr.readyState === 4 && finish_xhr.status === 200) {
         console.log('uploaded file');
+        console.log(response);
+        trigger_xhr.open('POST', "/trigger_processing/", true);
+        trigger_xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        trigger_xhr.send('access_token='+access_token+'&file_id='+response.id+'&csrfmiddlewaretoken='+csrf_token);
         var done = "<h3>Upload successful.</h3>";
         $("#upload_form").replaceWith('<div id="upload_form">'+done+'</div>');
       } else {
