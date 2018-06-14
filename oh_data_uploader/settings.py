@@ -28,6 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'whopsthereshouldbeone')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv('DEBUG', '').lower() == 'false' else True
+INACTIVE_PROJECT = True if os.getenv('INACTIVE_PROJECT', "False").lower() == 'true' else False
 
 # Infer if this is running on Heroku based on this being set.
 HEROKUCONFIG_APP_NAME = os.getenv('HEROKUCONFIG_APP_NAME', '')

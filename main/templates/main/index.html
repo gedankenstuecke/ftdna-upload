@@ -33,6 +33,14 @@
             </li>
           </ol>
 
+          {%if inactive_project%}
+            <div class="alert alert-danger" role="alert">
+              <b>This project is currently awaiting new approval from Open Humans
+              before it can accept data again.</b> Head to the Open Humans website
+              if you want to deauthorize this project and delete its files.
+            </div>
+          {%else%}
+
           {% if config.oh_client_id and config.oh_client_secret and file_num %}
           <a class="btn btn-primary btn-lg"
             href="{{ auth_url }}">
@@ -43,6 +51,7 @@
             href="{% url 'project-admin:home' %}">
               Setup your project
           </a>
+          {% endif %}
           {% endif %}
           <h2>FAQ</h2>
           <div class="panel panel-default">

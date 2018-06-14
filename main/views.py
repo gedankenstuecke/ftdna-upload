@@ -154,6 +154,7 @@ def index(request):
                           "</a></b>"
                       ))
     context = {'auth_url': auth_url,
+               'inactive_project': settings.INACTIVE_PROJECT,
                'index_page': "".join(proj_config.homepage_text),
                'file_num': file_num}
     if request.user.is_authenticated and request.user.username != 'admin':
