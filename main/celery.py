@@ -53,10 +53,14 @@ def valid_line(line):
     lsplit = line.rstrip().split(",")
     if check_integer(lsplit[1]) and \
        check_integer(lsplit[2]) and \
-       lsplit[0].startswith('"rs') and \
-       len(lsplit) == 4:
+       (lsplit[0].startswith('"rs') or lsplit[0].startswith('rs')) and \
+       (len(lsplit) == 4 or len(lsplit) == 5):
         return True
     elif line.rstrip() == 'RSID,CHROMOSOME,POSITION,RESULT':
+        return True
+    elif line.rstrip().startswith('# famfinder'):
+        return True
+    elif line.rstrip() == '# name,chromosome,position,allele1,allele2':
         return True
     else:
         return False
